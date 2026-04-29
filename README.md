@@ -1,1 +1,760 @@
-# -
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milady Studio | Сұлулық салоны</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold: #d4af37;
+      --gold2:#f5d77a;
+      --bg1:#140a05;
+      --bg2:#000;
+      --muted: rgba(255,255,255,.75);
+      --border: rgba(212,175,55,.55);
+      --shadow: 0 0 25px rgba(212,175,55,.35);
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .glow {
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(212,175,55,.12), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(245,215,122,.10), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(212,175,55,.08), transparent 50%);
+      filter: blur(10px);
+      z-index: -1;
+      animation: floatGlow 10s ease-in-out infinite alternate;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,.45);
+      border-bottom: 1px solid rgba(212,175,55,.25);
+    }
+    .nav-inner{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      gap: 12px;
+    }
+    .brand{
+      display:flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand .title{
+      font-family: 'Marcellus', serif;
+      letter-spacing: .8px;
+      font-size: 18px;
+      color: var(--gold2);
+    }
+    .brand .sub{
+      font-size: 12px;
+      color: rgba(255,255,255,.65);
+    }
+    .nav a{
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition: .25s;
+      white-space: nowrap;
+    }
+    .nav a:hover{
+      color: #000;
+      background: linear-gradient(45deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 18px rgba(212,175,55,.25);
+    }
+    .nav-links{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    header {
+      text-align: center;
+      padding: 110px 20px 90px;
+      background: url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9') center/cover;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+    }
+    header::before{
+      content:"";
+      position:absolute;
+      inset:-60px;
+      background: radial-gradient(circle at 50% 30%, rgba(212,175,55,.12), transparent 55%);
+      z-index:1;
+      animation: pulse 5s ease-in-out infinite;
+    }
+
+    header h1, header p, .hero-actions {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 58px;
+      margin: 0;
+      color: var(--gold);
+      animation: fadeDown 1.2s ease both;
+      text-shadow: 0 0 24px rgba(212,175,55,.25);
+    }
+
+    header p {
+      font-size: 18px;
+      margin: 14px auto 0;
+      max-width: 720px;
+      color: rgba(255,255,255,.85);
+      animation: fadeUp 1.2s ease .1s both;
+    }
+
+    .hero-actions{
+      margin-top: 30px;
+      display:flex;
+      gap: 12px;
+      justify-content:center;
+      flex-wrap: wrap;
+      animation: fadeIn 1.2s ease .25s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content:center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.35s;
+      border: 1px solid transparent;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-primary{
+      background: linear-gradient(45deg, var(--gold), var(--gold2));
+      color: #000;
+    }
+    .btn-primary:hover{
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 22px rgba(212,175,55,.45);
+    }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border: 1px solid rgba(212,175,55,.35);
+    }
+    .btn-ghost:hover{
+      background: rgba(212,175,55,.10);
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(212,175,55,.22);
+    }
+
+    section { padding: 70px 20px; text-align: center; }
+    .container{ max-width: 1100px; margin: 0 auto; }
+
+    h2 {
+      color: var(--gold);
+      margin: 0 0 14px;
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      letter-spacing: .3px;
+    }
+    .section-sub{
+      margin: 0 auto 40px;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: rgba(17,17,17,.92);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: 0.35s;
+      transform: translateY(16px);
+      opacity: 0;
+      will-change: transform, opacity;
+      position: relative;
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 20% 10%, rgba(212,175,55,.12), transparent 45%);
+      opacity: 0;
+      transition: .35s;
+      pointer-events: none;
+    }
+
+    .card.reveal { transition-delay: var(--d, 0ms); }
+
+    .card.is-visible{
+      transform: translateY(0);
+      opacity: 1;
+      animation: cardPop .7s ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: var(--shadow);
+    }
+    .card:hover::after{ opacity: 1; }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.03);
+      transform: scale(1.02);
+      transition: .6s;
+      display:block;
+    }
+    .card:hover img{ transform: scale(1.08); }
+
+    .card-content { padding: 18px 18px 20px; text-align: left; }
+    .card h3{ margin: 0; font-size: 18px; color: #fff; letter-spacing: .2px; }
+    .card p{ margin: 10px 0 0; color: rgba(255,255,255,.78); font-size: 14px; line-height: 1.6; }
+
+    .tag{
+      display:inline-flex;
+      margin-top: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #000;
+      background: linear-gradient(45deg, var(--gold), var(--gold2));
+      font-weight: 600;
+    }
+
+    .price-card{ padding: 22px 18px; }
+    .price-row{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(212,175,55,.25);
+    }
+    .price-row:last-child{ border-bottom: none; }
+    .price-title{ font-weight: 500; color: rgba(255,255,255,.9); font-size: 14px; text-align:left; }
+    .price{ color: var(--gold2); font-weight: 700; white-space: nowrap; font-size: 14px; }
+
+    .contact-box{
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid rgba(212,175,55,.35);
+      background: rgba(17,17,17,.65);
+      box-shadow: 0 0 18px rgba(0,0,0,.35);
+      text-align: left;
+    }
+    .contact-line{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(212,175,55,.18);
+      flex-wrap: wrap;
+    }
+    .contact-line:last-child{ border-bottom: none; }
+    .contact-left{ color: rgba(255,255,255,.9); font-size: 14px; }
+    .contact-actions{ display:flex; gap: 10px; flex-wrap: wrap; }
+
+    .review-form{
+      display:none;
+      margin-top: 26px;
+      max-width: 560px;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:left;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(212,175,55,.35);
+      background: rgba(17,17,17,.65);
+      box-shadow: 0 0 18px rgba(0,0,0,.35);
+    }
+    .review-form label{
+      display:block;
+      font-size: 13px;
+      color: rgba(255,255,255,.8);
+      margin: 10px 0 6px;
+    }
+    .review-input, .review-textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+      color:#fff;
+      outline:none;
+    }
+    .review-textarea{ min-height: 110px; resize: vertical; }
+    .stars{
+      font-size: 28px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      user-select:none;
+      margin-top: 6px;
+    }
+    .stars span{ color: rgba(255,255,255,.35); }
+    .stars span.active{ color: var(--gold2); text-shadow: 0 0 14px rgba(212,175,55,.35); }
+
+    footer {
+      text-align: center;
+      padding: 28px 14px;
+      background: #000;
+      border-top: 1px solid rgba(212,175,55,.35);
+      color: rgba(255,255,255,.7);
+      font-size: 13px;
+    }
+
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes fadeDown { from {opacity: 0; transform: translateY(-28px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes fadeUp { from {opacity: 0; transform: translateY(28px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes cardPop { from {transform: translateY(18px) scale(.98); opacity: 0;} to {transform: translateY(0) scale(1); opacity: 1;} }
+    @keyframes floatGlow { from {transform: translate3d(0,0,0) scale(1);} to {transform: translate3d(20px,-10px,0) scale(1.05);} }
+    @keyframes pulse { 0%,100%{opacity:.55;} 50%{opacity:.9;} }
+
+    @media(max-width: 768px){
+      h1 { font-size: 38px; }
+      h2 { font-size: 30px; }
+      .nav-inner{ padding: 12px 12px; }
+      .nav-links a{ padding: 8px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; }
+      .card{ opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="title">Milady Studio</div>
+        <div class="sub">Сұлулық – сіздің сенімділігіңіз</div>
+      </div>
+      <div class="nav-links">
+        <a href="#services">Қызметтер</a>
+        <a href="#prices">Бағалар</a>
+        <a href="#reviews">Пікірлер</a>
+        <a href="#contact">Байланыс</a>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <h1>Milady Studio</h1>
+    <p>Маникюр, педикюр, макияждың барлық түрі және шаш қызметтері — сізге арналған premium күтім ✨</p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Жазылу</a>
+      <a href="#services" class="btn btn-ghost">Қызметтерді көру</a>
+    </div>
+  </header>
+
+  <section id="services">
+    <div class="container">
+      <h2>Біздің қызметтер</h2>
+      <p class="section-sub">
+        Бізде күнделікті күтімнен бастап, маңызды мерекелік образға дейін толық қызмет көрсетіледі.
+        Сапалы материалдар, ұқыпты жұмыс және әдемі нәтиже — басты қағида.
+      </p>
+
+      <div class="grid">
+        <div class="card reveal">
+          <img loading="lazy" src="https://sunlight.net/wiki/wp-content/uploads/2023/01/Manikyur.jpg" alt="Маникюр">
+          <div class="card-content">
+            <h3>Маникюр</h3>
+            <p>Гель-лак, дизайн, тырнақты күшейту және классикалық күтім.</p>
+            <span class="tag">Classic • Gel • Design</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://images.thevoicemag.ru/upload/img_cache/409/409b6c1bc6b33cee4cfc322eb49d1b76_cropped_510x637.webp" alt="Педикюр">
+          <div class="card-content">
+            <h3>Педикюр</h3>
+            <p>Аппараттық/классикалық педикюр, жұмсарту және әдемі finish.</p>
+            <span class="tag">Relax • Care • Beauty</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://oblaka4you.ru/thumb/2/DHTSVXVCHPRmGFXU10KooA/800r450/d/lvechermak_22.jpg" alt="Макияж">
+          <div class="card-content">
+            <h3>Макияж (барлық түрі)</h3>
+            <p>Күндізгі, кешкі, тойлық және фотосессияға арналған макияж.</p>
+            <span class="tag">Day • Evening • Bridal</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://mail.kz/upload/userfiles/editor/157291/images/2-low-bun-updo.jpg" alt="Шаш сәндеу">
+          <div class="card-content">
+            <h3>Шаш сәндеу</h3>
+            <p>Укладка, локон, жинақталған прическа және күнделікті стиль.</p>
+            <span class="tag">Styling • Volume</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://static.tildacdn.com/tild3463-6137-4437-b834-363639356138/strizhka-na-dlinie-v.JPG" alt="Шаш қию">
+          <div class="card-content">
+            <h3>Шаш қию</h3>
+            <p>Әйелдерге арналған заманауи haircut, форма және ұштарын түзету.</p>
+            <span class="tag">Modern cut</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://www.evolution-clinic.com/wp-content/uploads/2023/07/woman-beauty-salon-face-treatment-1024x748.jpg" alt="Бет күтімі">
+          <div class="card-content">
+            <h3>Бет және тері күтімі</h3>
+            <p>Ылғалдандыру, тазарту, сергіту және жасартатын процедуралар.</p>
+            <span class="tag">Skincare • Glow</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://optim.tildacdn.one/tild3130-3330-4336-b761-363838366336/-/resize/552x/-/format/webp/noroot.jpg.webp" alt="Спа және массаж">
+          <div class="card-content">
+            <h3>Спа және массаж</h3>
+            <p>Толық релакс: арқа/мойын массажы, SPA күтім, демалыс атмосферасы.</p>
+            <span class="tag">Relax • SPA</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <img loading="lazy" src="https://daviani.ru/upload/b55.jpg" alt="Шаш бояу">
+          <div class="card-content">
+            <h3>Шаш бояу</h3>
+            <p>Түсті жаңарту, тондау, күрделі бояу түрлері (қалауыңызға қарай).</p>
+            <span class="tag">Color • Tone</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="container">
+      <h2>Прайс лист</h2>
+      <p class="section-sub">
+        Бағалар қызмет түріне және материалға байланысты өзгеруі мүмкін.
+        Нақты бағасын WhatsApp арқылы бірден жазып біле аласыз.
+      </p>
+
+      <div class="grid">
+        <div class="card reveal">
+          <div class="card-content price-card">
+            <h3>Шаш қызметтері</h3>
+            <div class="price-row"><div class="price-title">Шаш қию</div><div class="price">7 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Укладка</div><div class="price">6 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Прическа</div><div class="price">10 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Шаш бояу</div><div class="price">15 000 ₸</div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content price-card">
+            <h3>Тырнақ қызметтері</h3>
+            <div class="price-row"><div class="price-title">Маникюр (гель-лак)</div><div class="price">8 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Маникюр (классика)</div><div class="price">5 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Педикюр</div><div class="price">9 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Дизайн (қосымша)</div><div class="price">+ 1 000 ₸</div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content price-card">
+            <h3>Макияж</h3>
+            <div class="price-row"><div class="price-title">Күндізгі макияж</div><div class="price">9 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Кешкі макияж</div><div class="price">12 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Тойлық макияж</div><div class="price">18 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Қосымша (кірпік/т.б.)</div><div class="price">+ 2 000 ₸</div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content price-card">
+            <h3>Бет және тері күтімі</h3>
+            <div class="price-row"><div class="price-title">Бет тазалау</div><div class="price">10 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Ылғалдандыру (маска)</div><div class="price">8 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Жасартатын күтім</div><div class="price">12 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Пилинг / скраб</div><div class="price">9 000 ₸</div></div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content price-card">
+            <h3>Спа және массаж</h3>
+            <div class="price-row"><div class="price-title">Арқа массажы (30 мин)</div><div class="price">8 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Толық дене массажы (60 мин)</div><div class="price">15 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">SPA күтім (скраб + май)</div><div class="price">18 000 ₸</div></div>
+            <div class="price-row"><div class="price-title">Relax массаж (45 мин)</div><div class="price">12 000 ₸</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;">
+        <a class="btn btn-primary" href="#contact">Жазылу (WhatsApp)</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <h2>Клиент пікірлері</h2>
+      <p class="section-sub">
+        Сіздің әр жазған пікіріңіз біз үшін өте маңызды ⭐
+      </p>
+
+      <div class="grid" id="reviewsContainer">
+        <div class="card reveal">
+          <div class="card-content">
+            <h3>Айдана</h3>
+            <p>Маникюр өте сапалы жасалды, дизайн дәл қалағанымдай болды.</p>
+            <span class="tag">★★★★★</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content">
+            <h3>Мадина</h3>
+            <p>Тойлық макияж керемет шықты! Кеш бойы бұзылмай тұрды.</p>
+            <span class="tag">★★★★★</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-content">
+            <h3>Динара</h3>
+            <p>Шаш бояу нәтижесі өте ұнады. Түс табиғи әрі жылтыр.</p>
+            <span class="tag">★★★★☆</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:34px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" type="button" onclick="openReviewForm()">Пікір жазу</button>
+        <a class="btn btn-ghost" href="#reviews">Пікірлерді оқу</a>
+      </div>
+
+      <div class="review-form" id="reviewForm">
+        <label for="reviewName">Атыңыз</label>
+        <input class="review-input" id="reviewName" type="text" placeholder="Мысалы: Аружан" />
+
+        <label for="reviewText">Пікіріңіз</label>
+        <textarea class="review-textarea" id="reviewText" placeholder="Қызмет ұнады ма? Несі ұнады?"></textarea>
+
+        <label>Рейтинг</label>
+        <div class="stars" id="stars">
+          <span data-v="1">★</span>
+          <span data-v="2">★</span>
+          <span data-v="3">★</span>
+          <span data-v="4">★</span>
+          <span data-v="5" class="active">★</span>
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn btn-primary" type="button" onclick="submitReview()">Жіберу</button>
+          <button class="btn btn-ghost" type="button" onclick="closeReviewForm()">Жабу</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Байланыс</h2>
+      <p class="section-sub">
+        Күніңізді және қызмет түрін жазып жіберіңіз — біз жауап береміз 💛
+      </p>
+
+      <div class="contact-box reveal">
+        <div class="contact-line">
+          <div class="contact-left">📞 Телефон: <strong><a id="phoneLink" style="color:var(--gold2);text-decoration:none;" href="#">+7 705 629 79 99</a></strong></div>
+          <div class="contact-actions">
+            <a class="btn btn-ghost" id="callBtn" href="#">Қоңырау шалу</a>
+            <a class="btn btn-primary" id="waBtn" href="#" target="_blank" rel="noopener">WhatsApp-қа жазу</a>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <div class="contact-left">📍 Қала: <strong>Астана</strong></div>
+          <div class="contact-actions">
+            <a class="btn btn-ghost" href="#services">Қызметтер</a>
+            <a class="btn btn-ghost" href="#prices">Бағалар</a>
+          </div>
+        </div>
+
+        <div class="contact-line">
+          <div class="contact-left">⏰ Жұмыс уақыты: <strong>10:00 – 20:00</strong></div>
+          <div class="contact-actions">
+            <a class="btn btn-ghost" href="#contact" onclick="copyPhone(event)">Нөмірді көшіру</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Milady Studio | Барлық құқықтар қорғалған
+  </footer>
+
+  <script>
+    const PHONE_E164 = "77056297999";
+    const PHONE_CALL = "+77056297999";
+
+    const waText = "Сәлеметсіз бе?! Milady Studio-ға жазылғым келеді. Қызмет: ___  Күні: ___  Уақыты: ___";
+    const waUrl = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waText)}`;
+    const callUrl = `tel:${PHONE_CALL}`;
+
+    document.getElementById("waBtn").href = waUrl;
+    document.getElementById("callBtn").href = callUrl;
+    document.getElementById("phoneLink").href = waUrl;
+
+    const cards = document.querySelectorAll('.card.reveal');
+    cards.forEach((el, i) => el.style.setProperty('--d', `${i * 90}ms`));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function copyPhone(e){
+      e.preventDefault();
+      const phone = PHONE_CALL;
+      navigator.clipboard.writeText(phone).then(() => {
+        alert("Нөмір көшірілді: " + phone);
+      }).catch(() => {
+        alert("Көшіру қолдаусыз. Телефонды қолмен көшіріңіз: " + phone);
+      });
+    }
+
+    let selectedRating = 5;
+
+    const formEl = document.getElementById("reviewForm");
+    const starsEl = document.getElementById("stars");
+
+    function openReviewForm(){
+      formEl.style.display = "block";
+      formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function closeReviewForm(){
+      formEl.style.display = "none";
+    }
+
+    function paintStars(val){
+      selectedRating = val;
+      const spans = starsEl.querySelectorAll("span");
+      spans.forEach(s => {
+        const v = Number(s.dataset.v);
+        if (v <= val) s.classList.add("active");
+        else s.classList.remove("active");
+      });
+    }
+
+    starsEl.addEventListener("click", (e) => {
+      const t = e.target.closest("span");
+      if (!t) return;
+      paintStars(Number(t.dataset.v));
+    });
+
+    function submitReview(){
+      const name = document.getElementById("reviewName").value.trim();
+      const text = document.getElementById("reviewText").value.trim();
+
+      if (!name || !text){
+        alert("Атыңыз бен пікіріңізді толтырыңыз 😊");
+        return;
+      }
+
+      const ratingText = "★".repeat(selectedRating) + "☆".repeat(5 - selectedRating);
+
+      const container = document.getElementById("reviewsContainer");
+      const card = document.createElement("div");
+      card.className = "card reveal is-visible";
+      card.innerHTML = `
+        <div class="card-content">
+          <h3>${escapeHtml(name)}</h3>
+          <p>${escapeHtml(text)}</p>
+          <span class="tag">${ratingText}</span>
+        </div>
+      `;
+      container.prepend(card);
+
+      document.getElementById("reviewName").value = "";
+      document.getElementById("reviewText").value = "";
+      paintStars(5);
+      closeReviewForm();
+    }
+
+    function escapeHtml(str){
+      return str
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    paintStars(5);
+  </script>
+</body>
+</html>
